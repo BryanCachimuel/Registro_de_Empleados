@@ -130,6 +130,23 @@ switch ($accion) {
         header("Location:index.php");
         
     break;
+
+    case "Seleccionar":
+        $accionAgregar="disabled";
+        $accionModificar=$accionEliminar=$accionCancelar="";
+        $mostrarModal=true;
+
+        $query=$pdo->prepare("SELECT * FROM empleados WHERE id=:id");
+        $query->bindParam(':id',$txtId);
+        $query->execute();
+        $empleado=$query->fetch(PDO::FETCH_LAZY);
+
+        $txtNombre=$empleado['nombre'];
+        $txtApellidoP=$empleado['apellidoP'];
+        $txtApellidoM=$empleado['apellidoM'];
+        $txtCorreo=$empleado['correo'];
+        $txtFoto=$empleado['foto'];
+    break;
 }
 // se va a ejecutar la consulta sql con esto $query->execute();
 // seguido $query se va almacenar en la variable $listaEmpleados con la cual se va a obtener la información 
