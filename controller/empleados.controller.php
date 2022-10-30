@@ -1,0 +1,80 @@
+<?php
+
+include("../config/conexion.php");
+
+// utilizaremos los valores ternarios para decir que si encuentra el
+// valor lo almacene en la variable txtId y caso contrario se pondrá vacio
+$txtId=(isset($_POST['txtId']))?$_POST['txtId']:"";
+$txtNombre=(isset($_POST['txtNombre']))?$_POST['txtNombre']:"";
+$txtApellidoP=(isset($_POST['txtApellidoP']))?$_POST['txtApellidoP']:"";
+$txtApellidoM=(isset($_POST['txtApellidoM']))?$_POST['txtApellidoM']:"";
+$txtCorreo=(isset($_POST['txtCorreo']))?$_POST['txtCorreo']:"";
+$txtFoto=(isset($_FILES['txtFoto']["name"]))?$_FILES['txtFoto']["name"]:"";
+
+$accion=(isset($_POST['accion']))?$_POST['accion']:"";
+
+// este dato va a servir para guardar todos los errores
+$error=array();
+
+/* se crean estas acciones para poder controlar el modal cuando se trata solo 
+de pulsar en el boton de añadir empleados y de seleccionar*/
+
+$accionAgregar="";
+$accionModificar=$accionEliminar=$accionCancelar="disabled";
+$mostrarModal=false;
+
+/*pdo -> obtiene la conexión que se creo en el archivo conexion además 
+prepare -> prepara lo que es la instruccion sql para que se inserte en la base de datos.*/
+
+switch ($accion) {
+    case "btnAgregar":
+
+        // validación
+        if($txtNombre==""){
+            $error['nombre']="Escribe el nombre";
+        }
+        if($txtApellidoP==""){
+            $error['apellidoP']="Escribe el apellido Paterno";
+        }
+        if($txtApellidoM==""){
+            $error['apellidoM']="Escribe el apellido Materno";
+        }
+        if($txtCorreo==""){
+            $error['correo']="Escribe el correo";
+        }
+        if(count($error)>0){
+            $mostrarModal=true;
+            break;
+        }
+
+        $query=$pdo->prepare("INSERT INTO empleados(nombre,apellidoP,apellidoM,correo,foto) VALUES(:nombre,:apellidoP,:apellidoM,:correo,:foto)");
+
+        $query->bindParam(':nombre',$txtNombre);
+        $query->bindParam(':apellidoP',$txtApellidoP);
+        $query->bindParam(':apellidoM',$txtApellidoM);
+        $query->bindParam(':correo',$txtCorreo);
+
+        /*va a repcionar la foto y la va adjuntar a la carpeta imagenes y despues la pasa a la bdd*/
+        $fecha=new DateTime();
+        $nombreArchivo=($txtFoto!="")?$fecha->getTimestamp()."_".$_FILES["txtFoto"]["name"]:"imagen.jpg";
+        $tmpFoto=$_FILES["txtFoto"]["tmp_name"];
+        if($tmpFoto!=""){
+            move_uploaded_file($tmpFoto,"../imagenes/".$nombreArchivo);
+        }
+        $query->bindParam(':foto',$nombreArchivo);
+        $query->execute();
+        header("Location:index.php");
+
+    break;
+  
+}
+// se va a ejecutar la consulta sql con esto $query->execute();
+// seguido $query se va almacenar en la variable $listaEmpleados con la cual se va a obtener la información 
+// mediante PDO::FETCH_ASSOC que es lo que hace es devolver o asociar información de la base de datos a un arreglo
+$query=$pdo->prepare("SELECT * FROM empleados WHERE 1");
+$query->execute();
+$listaEmpleados=$query->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+?>
