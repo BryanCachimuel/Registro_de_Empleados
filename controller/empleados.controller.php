@@ -147,6 +147,10 @@ switch ($accion) {
         $txtCorreo=$empleado['correo'];
         $txtFoto=$empleado['foto'];
     break;
+
+    case "btnCancelar":
+        header("Location:index.php");
+    break;
 }
 // se va a ejecutar la consulta sql con esto $query->execute();
 // seguido $query se va almacenar en la variable $listaEmpleados con la cual se va a obtener la información 
