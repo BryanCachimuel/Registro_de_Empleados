@@ -66,6 +66,47 @@ switch ($accion) {
         header("Location:index.php");
 
     break;
+
+    case "btnModificar":
+        $query=$pdo->prepare("UPDATE empleados SET nombre=:nombre,apellidoP=:apellidoP,apellidoM=:apellidoM,correo=:correo WHERE id=:id");
+
+        $query->bindParam(':nombre',$txtNombre);    
+        $query->bindParam(':apellidoP',$txtApellidoP);
+        $query->bindParam(':apellidoM',$txtApellidoM);
+        $query->bindParam(':correo',$txtCorreo);
+     
+        $query->bindParam(':id',$txtId);
+        $query->execute();
+
+        $fecha=new DateTime();
+        $nombreArchivo=($txtFoto!="")?$fecha->getTimestamp()."_".$_FILES["txtFoto"]["name"]:"imagen.jpg";
+        $tmpFoto=$_FILES["txtFoto"]["tmp_name"];
+        if($tmpFoto!=""){
+            move_uploaded_file($tmpFoto,"../imagenes/".$nombreArchivo);
+                
+           // mediante este código se modifica la imagen ya que si se tiene una imagen guardada anteriormenete
+           // y se sube otra esta se cambia 
+            $query=$pdo->prepare("SELECT foto FROM empleados WHERE id=:id");
+            $query->bindParam(':id',$txtId);
+            $query->execute();
+            
+            $empleado=$query->fetch(PDO::FETCH_LAZY);
+            if(isset($empleado["foto"])){
+                if(file_exists("../imagenes/".$empleado["foto"])){
+                   if($item['foto']!="imagen-jpg"){
+                     unlink("../imagenes/".$empleado["foto"]);
+                   }
+                }
+            }
+            // seccion solo para actualizar el campo foto
+            $query=$pdo->prepare("UPDATE empleados SET foto=:foto WHERE id=:id");
+            $query->bindParam(':foto',$nombreArchivo);
+            $query->bindParam(':id',$txtId);
+            $query->execute();
+        }
+        header("Location:index.php");
+
+    break;
   
 }
 // se va a ejecutar la consulta sql con esto $query->execute();
