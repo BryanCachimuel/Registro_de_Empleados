@@ -107,7 +107,29 @@ switch ($accion) {
         header("Location:index.php");
 
     break;
-  
+
+    case "btnEliminar":
+        $query=$pdo->prepare("SELECT foto FROM empleados WHERE id=:id");
+        $query->bindParam(':id',$txtId);
+        $query->execute();
+
+        // PDO::FETCH_LAZY -> solo nos va a devolver un dato de la tabla seleccionada 
+        // file_exist -> verifica si existe un archivo 
+        // unlink -> borra de la carpeta la imagen si existe
+        $empleado=$query->fetch(PDO::FETCH_LAZY);
+        if(isset($empleado["foto"]) && ($item['foto']!="imagen.jpg")){
+            if(file_exists("../imagenes/".$empleado["foto"])){
+                unlink("../imagenes/".$empleado["foto"]);
+            }
+        }
+        
+        $query=$pdo->prepare("DELETE FROM empleados WHERE id=:id");
+        $query->bindParam(':id',$txtId);
+        $query->execute();
+   
+        header("Location:index.php");
+        
+    break;
 }
 // se va a ejecutar la consulta sql con esto $query->execute();
 // seguido $query se va almacenar en la variable $listaEmpleados con la cual se va a obtener la información 
