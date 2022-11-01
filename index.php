@@ -15,7 +15,7 @@
     <header id="header">
         <div class="container__header">
             <div class="logo">
-                <img src="./public/images/logo-magtimus.png">
+                <h3>Registro de Empleados</h3>
             </div>
             <div class="container__nav">
                 <nav id="nav">
@@ -44,8 +44,7 @@
                     <img src="./public/images/undraw_Code_thinking_re_gka2.svg">
                 </div>
             </div>
-
         </div>
-<script src="js/script.js"></script>
+    </div>
 </body>
 </html>
