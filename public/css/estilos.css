@@ -70,11 +70,14 @@ nav ul{
 nav ul li{
     margin: 0px 20px;
     list-style: none;
+    color: #fff;
 }
 
 nav ul li a{
     color: #373737;
     font-size: 14px;
+    text-decoration: none;
+    color: #fff;
 }
 
 .select{
