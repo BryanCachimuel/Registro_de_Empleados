@@ -56,14 +56,14 @@ switch ($accion) {
 
         /*va a repcionar la foto y la va adjuntar a la carpeta imagenes y despues la pasa a la bdd*/
         $fecha=new DateTime();
-        $nombreArchivo=($txtFoto!="")?$fecha->getTimestamp()."_".$_FILES["txtFoto"]["name"]:"imagen.jpg";
+        $nombreArchivo=($txtFoto!="")?$fecha->getTimestamp()."_".$_FILES["txtFoto"]["name"]:"user.png";
         $tmpFoto=$_FILES["txtFoto"]["tmp_name"];
         if($tmpFoto!=""){
             move_uploaded_file($tmpFoto,"../public/images/".$nombreArchivo);
         }
         $query->bindParam(':foto',$nombreArchivo);
         $query->execute();
-        header("Location: ../views/empleados.php");
+        header("Location:empleados.php");
 
     break;
 
@@ -79,7 +79,7 @@ switch ($accion) {
         $query->execute();
 
         $fecha=new DateTime();
-        $nombreArchivo=($txtFoto!="")?$fecha->getTimestamp()."_".$_FILES["txtFoto"]["name"]:"imagen.jpg";
+        $nombreArchivo=($txtFoto!="")?$fecha->getTimestamp()."_".$_FILES["txtFoto"]["name"]:"user.png";
         $tmpFoto=$_FILES["txtFoto"]["tmp_name"];
         if($tmpFoto!=""){
             move_uploaded_file($tmpFoto,"../public/images/".$nombreArchivo);
@@ -92,7 +92,7 @@ switch ($accion) {
             
             $empleado=$query->fetch(PDO::FETCH_LAZY);
             if(isset($empleado["foto"])){
-                if(file_exists("../imagenes/".$empleado["foto"])){
+                if(file_exists("../public/images/".$empleado["foto"])){
                    if($item['foto']!="imagen-jpg"){
                      unlink("../public/images/".$empleado["foto"]);
                    }
@@ -104,7 +104,7 @@ switch ($accion) {
             $query->bindParam(':id',$txtId);
             $query->execute();
         }
-        header("Location: ../views/empleados.php");
+        header("Location:empleados.php");
 
     break;
 
@@ -127,7 +127,7 @@ switch ($accion) {
         $query->bindParam(':id',$txtId);
         $query->execute();
    
-        header("Location: ../views/empleados.php");
+        header("Location:empleados.php");
         
     break;
 
@@ -149,7 +149,7 @@ switch ($accion) {
     break;
 
     case "btnCancelar":
-        header("Location: ../views/empleados.php");
+        header("Location: empleados.php");
     break;
 }
 /*se va a ejecutar la consulta sql con esto $query->execute();
