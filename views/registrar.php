@@ -112,7 +112,7 @@ if(isset($_POST['submit']))
         <meta name="author" content="" />
         <title>Registro de Empleados</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link rel="stylesheet" href="./public/css/registro.css">
+        <link rel="stylesheet" href="../public/css/registro.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -122,7 +122,7 @@ if(isset($_POST['submit']))
        
             <main>
             <nav class="navegar">
-                <a href="index.php" class="navegar__it navegar__it--cta">Sistema Web de Libros</a>
+                <a href="../index.php" class="navegar__it navegar__it--cta">Registro de empleados</a>
             </nav>
                     <div class="container">
                         <div class="row justify-content-center">

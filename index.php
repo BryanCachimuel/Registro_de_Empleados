@@ -38,7 +38,7 @@
                     <h1>Registro de</h1>
                     <h2>Empleados</h2>
                     <p>Sistema creado para el registro de empleados de la empresa</p>
-                    <input type="button" value="Registro">
+                    <a href="./views/registrar.php" class="btn btn-warning">Registrar</a>
                 </div>
                 <div class="container__vector">
                     <img src="./public/images/undraw_Code_thinking_re_gka2.svg">
