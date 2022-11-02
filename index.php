@@ -1,3 +1,47 @@
+<?php
+session_start();
+require_once('./config/conexion.php');
+ 
+if(isset($_POST['submit'])){
+
+	if(isset($_POST['email'],$_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])){
+		$email = trim($_POST['email']);
+		$password = trim($_POST['password']);
+ 
+		if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+			$sql = "select * from usuarios where email = :email ";
+			$handle = $pdo->prepare($sql);
+			$params = ['email'=>$email];
+			$handle->execute($params);
+			if($handle->rowCount() > 0){
+				$getRow = $handle->fetch(PDO::FETCH_ASSOC);
+				
+                if(password_verify($password, $getRow['password'])){
+					unset($getRow['password']);
+					$_SESSION = $getRow;
+					header('location: ./views/empleados.php');
+					exit();
+				}
+				else{
+					$errors[] = "Error en  Email o Password";
+				}
+			}
+			else
+			{
+				$errors[] = "Error Email o Password";
+			}			
+		}
+		else
+		{
+			$errors[] = "Email no valido";	
+		}
+	}
+	else
+	{
+		$errors[] = "Email y Password son requeridos";	
+	} 
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,11 +100,27 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Iniciar Sesión</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+        <?php
+            if (isset($errors) && count($errors) > 0) {
+                foreach ($errors as $error_msg) {
+                    echo '<div class="alert alert-danger">' . $error_msg . '</div>';
+                }
+            }
+        ?>
+        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <div class="form-floating mb-3">
+                <input class="form-control" name="email" id="inputEmail" type="email" placeholder="name@example.com" />
+                <label for="inputEmail">Email address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input class="form-control" name="password" id="inputPassword" type="password" placeholder="Password" />
+                <label for="inputPassword">Password</label>
+            </div>
+            
+            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                <button type="submit" name="submit" class="btn btn-primary">Inicar Sesión</button>
+            </div>
+        </form>
       </div>
     </div>
   </div>
