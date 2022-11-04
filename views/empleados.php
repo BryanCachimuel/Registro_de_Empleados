@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!$_SESSION['id']){
-    header('location:./index.php');
+    header('location:../index.php');
 }
 ?>
 <?php
@@ -102,7 +102,7 @@ include("../controller/empleados.controller.php");
 
                     <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Añadir Empleado</button>
-            <a href="logout.php?logout=true" class="btn btn-danger">Cerrar Sesión</a>
+            <a href="../controller/sesion.php?sesion=true" class="btn btn-danger">Cerrar Sesión</a>
  </form>
         <div class="row mt-4">
             <table class="table table-hover table-bordered">
