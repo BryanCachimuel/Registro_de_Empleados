@@ -1,4 +1,10 @@
 <?php
+session_start();
+if(!$_SESSION['id']){
+    header('location:./index.php');
+}
+?>
+<?php
 // llamdo al archivo que tiene la lógica del crud
 include("../controller/empleados.controller.php");
 ?>
@@ -96,6 +102,7 @@ include("../controller/empleados.controller.php");
 
                     <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Añadir Empleado</button>
+            <a href="logout.php?logout=true" class="btn btn-danger">Cerrar Sesión</a>
  </form>
         <div class="row mt-4">
             <table class="table table-hover table-bordered">
