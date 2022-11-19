@@ -59,12 +59,12 @@ if(isset($_POST['submit'])){
     <header id="header">
         <div class="container__header">
             <div class="logo">
-                <h3>Registro de Empleados</h3>
+                <a style="text-decoration: none;" href="index.php"><h3>Registro de Empleados</h3></a>
             </div>
             <div class="container__nav">
                 <nav id="nav">
                     <ul>
-                        <li><a href="./views/empleados.php" class="select" data-bs-toggle="modal" data-bs-target="#exampleModal">Iniciar Sesión</a></li>
+                        <li><a href="./views/empleados.php" class="select" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Iniciar Sesión</a></li>
                     </ul>
                 </nav>         
                 <div class="btn__menu" id="btn_menu"><i class="fas fa-bars"></i></div>
@@ -92,39 +92,39 @@ if(isset($_POST['submit'])){
     </div>
 
     <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Iniciar Sesión</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <?php
-            if (isset($errors) && count($errors) > 0) {
-                foreach ($errors as $error_msg) {
-                    echo '<div class="alert alert-danger">' . $error_msg . '</div>';
-                }
-            }
-        ?>
-        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <div class="form-floating mb-3">
-                <input class="form-control" name="email" id="inputEmail" type="email" placeholder="name@example.com" />
-                <label for="inputEmail">Email address</label>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Iniciar Sesión</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="form-floating mb-3">
-                <input class="form-control" name="password" id="inputPassword" type="password" placeholder="Password" />
-                <label for="inputPassword">Password</label>
+            <div class="modal-body">
+                <?php
+                    if (isset($errors) && count($errors) > 0) {
+                        foreach ($errors as $error_msg) {
+                            echo '<div class="alert alert-danger">' . $error_msg . '</div>';
+                        }
+                    }
+                ?>
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" name="email" id="inputEmail" type="email" placeholder="name@example.com" />
+                        <label for="inputEmail">Email address</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" name="password" id="inputPassword" type="password" placeholder="Password" />
+                        <label for="inputPassword">Password</label>
+                    </div>
+                    
+                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                        <button type="submit" name="submit" class="btn btn-primary">Inicar Sesión</button>
+                    </div>
+                </form>
             </div>
-            
-            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                <button type="submit" name="submit" class="btn btn-primary">Inicar Sesión</button>
             </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
-</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
