@@ -18,7 +18,7 @@ if(isset($_POST['submit']))
         if(filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             $sql = 'select * from usuarios where email = :email';
-            $stmt = $base_de_datos->prepare($sql);
+            $stmt = $pdo->prepare($sql);
             $p = ['email'=>$email];
             $stmt->execute($p);
             
@@ -27,7 +27,7 @@ if(isset($_POST['submit']))
                 $sql = "insert into usuarios (nombre, apellido, email, `password`, created_at,updated_at) values(:vnombre,:vapellido,:email,:pass,:created_at,:updated_at)";
 
                 try{
-                    $handle = $base_de_datos->prepare($sql);
+                    $handle = $pdo->prepare($sql);
                     $params = [
                         ':vnombre'=>$firstName,
                         ':vapellido'=>$lastName,
@@ -111,20 +111,25 @@ if(isset($_POST['submit']))
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Registro de Empleados</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../public/css/estilos.css">
         <link rel="stylesheet" href="../public/css/registro.css">
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
+    <header id="header">
+        <div class="container__header">
+            <div class="logo">
+                <a style="text-decoration: none;" href="../index.php"><h3>Registro de Empleados</h3></a>
+            </div>
+        </div>
+    </header>
     <body class="sb-nav-fixed">
      
 
         <div id="layoutSidenav_content">
        
             <main>
-            <nav class="navegar">
-                <a href="../index.php" class="navegar__it navegar__it--cta">Registro de empleados</a>
-            </nav>
-                    <div class="container">
+                    <div class="container mt-5">
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
@@ -184,7 +189,7 @@ if(isset($_POST['submit']))
                                             </div>
                                             <div class="mt-4 mb-0">
                                                 <button type="submit" name="submit" class="btn btn-primary">Registrarse</button>
-                                                <a href="login.php" class="btn btn-success">Login</a>
+                                                <a href="../index.php" class="btn btn-success">Login</a>
                                             </div>
                                         </form>
                                     </div>
