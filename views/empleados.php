@@ -15,6 +15,7 @@ include("../controller/empleados.controller.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos de Empleados</title>
+    <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
@@ -24,7 +25,26 @@ include("../controller/empleados.controller.php");
         enctype -> va a hacer que cuando la información contenga una imagen 
         esta aumaticamente se pueda recepcionar 
     -->
+     <!-- Button trigger modal -->
+
+     <div class="menu-bar">
+      <h1 class="logo">Registro <span>Empleados</span></h1>
+      <ul>
+        
+        <li><a href="#">Cerrar Sesión <i class="fas fa-caret-down"></i></a>
+
+            <div class="dropdown-menu">
+                <ul>
+                 <a href="../controller/sesion.php?sesion=true" >Cerrar Sesión</a>
+                </ul>
+              </div>
+        </li>
+      </ul>
+    </div>
+
+
     <div class="container mt-4">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Añadir Empleado</button>
         <form action="" method="POST" enctype="multipart/form-data">
         <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -100,9 +120,6 @@ include("../controller/empleados.controller.php");
         </div>
         </div>
 
-                    <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Añadir Empleado</button>
-            <a href="../controller/sesion.php?sesion=true" class="btn btn-danger">Cerrar Sesión</a>
  </form>
         <div class="row mt-4">
             <table class="table table-hover table-bordered">
@@ -154,5 +171,6 @@ include("../controller/empleados.controller.php");
                 }
             </script>   
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
