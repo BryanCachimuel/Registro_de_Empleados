@@ -140,14 +140,20 @@ if(isset($_POST['submit']))
                                    {
                                        foreach($errors as $error_msg)
                                        {
-                                           echo '<div class="alert alert-danger">'.$error_msg.'</div>';
+                                           echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                    <strong>'. $error_msg .'</strong>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                 </div>';
                                        }
                                    }
                                    
                                    if(isset($success))
                                    {
                                        
-                                       echo '<div class="alert alert-success">'.$success.'</div>';
+                                       echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>'. $success .'</strong>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>';
                                    }
                                ?>
                                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
@@ -203,7 +209,7 @@ if(isset($_POST['submit']))
    </div>
       
 </div> <!-- /form -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/chart-area-demo.js"></script>

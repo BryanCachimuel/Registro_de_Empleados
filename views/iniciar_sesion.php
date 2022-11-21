@@ -51,6 +51,7 @@ if(isset($_POST['submit'])){
     <title>Inicio de Sesión</title>
     <link rel="stylesheet" href="./public/css/estilos.css">
     <link rel="stylesheet" href="../public/css/registro.css">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 </head>
 
@@ -76,7 +77,10 @@ if(isset($_POST['submit'])){
                                <?php
                                     if (isset($errors) && count($errors) > 0) {
                                         foreach ($errors as $error_msg) {
-                                            echo '<div class="alert alert-danger">' . $error_msg . '</div>';
+                                            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                    <strong>'. $error_msg .'</strong>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                  </div>';
                                         }
                                     }
                                 ?>
@@ -108,5 +112,6 @@ if(isset($_POST['submit'])){
    </div>
       
 </div> <!-- /form -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
