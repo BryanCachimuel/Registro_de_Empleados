@@ -191,6 +191,9 @@ if(isset($_POST['submit']))
                                                </div>
                                            </div>
                                        </div>
+
+                                       <input type="checkbox" onclick="compararContrasenia()"> Mostrar Contraseñas
+
                                        <div class="mt-4 mb-0">
                                            <button type="submit" name="submit" class="btn btn-primary">Registrarse</button>
                                            <a href="iniciar_sesion.php" class="btn btn-success">Login</a>
@@ -216,5 +219,6 @@ if(isset($_POST['submit']))
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+        <script src="../public/js/mostrar.js"></script>
     </body>
 </html>
